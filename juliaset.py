@@ -1,13 +1,12 @@
 """This program allows the user to display one Julia set at a time.
 It is recommended to have at least an 80 column display.
 """
-import math
+# import math
 import imag
 
 # (x-range), (y-range), (resolution=(4, 4)), (divergant (depth), convergent, (0,0)) ("□", "■", "▣")
-# PARAMETERS = ((-2, 0.5), (-1.12, 1.12), (4, 4), (" ", "*", "@")) # Mandelbrot
+PARAMETERS = ((-2, 0.5), (-1.12, 1.12), (4, 4), (" ", "*", "@")) # Mandelbrot
 # PARAMETERS = ((-2, 2), (-2, 2), (4, 4), ((" ", ",", ".", "'", ":"), "*", "@")) # Julia sets
-PARAMETERS = ((-2, 0.5), (-1.12, 1.12), (4, 4), ("□", "■", "▣"))
 
 
 def algorithm(z: imag.imag, c: imag.imag) -> imag.imag:
@@ -26,7 +25,7 @@ def main():
         for _ in range(
             int(PARAMETERS[0][0] * 100),
             int(PARAMETERS[0][1] * 100),
-            PARAMETERS[2][1], )
+            PARAMETERS[2][1])
     ])
 
     # Generate points
@@ -82,4 +81,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
