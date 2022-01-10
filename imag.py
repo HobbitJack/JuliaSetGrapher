@@ -7,6 +7,7 @@ class imag:
         self.a = float(a)
         if math.fabs(self.a) < 0.00000000001:
             self.a = 0
+            
         self.b = float(b)
         if math.fabs(self.b) < 0.00000000001:
             self.b = 0
