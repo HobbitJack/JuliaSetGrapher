@@ -4,9 +4,9 @@ It is recommended to have at least an 80 column display.
 # import math
 import imag
 
-# (x-range), (y-range), (resolution=(4, 4)), (divergant (depth), convergent, (0,0)) ("□", "■", "▣")
-PARAMETERS = ((-2, 0.5), (-1.12, 1.12), (4, 4), (" ", "*", "@")) # Mandelbrot
-# PARAMETERS = ((-2, 2), (-2, 2), (4, 4), ((" ", ",", ".", "'", ":"), "*", "@")) # Julia sets
+# (x-range), (y-range), (resolution=(4, 4)), (divergent (depth), convergent, (0,0)) ("□", "■", "▣")
+PARAMETERS = ((-2, 0.5), (-1.12, 1.12), (4, 4), (" ", "*", "@"))  # Mandelbrot
+# PARAMETERS = ((-2, 2), (-2, 2), (4, 4), ((" ", ",", ".", "'", ":"), "*", "@"))  # Julia sets
 
 
 def algorithm(z: imag.imag, c: imag.imag) -> imag.imag:
@@ -19,7 +19,7 @@ def algorithm(z: imag.imag, c: imag.imag) -> imag.imag:
 def main():
     print()
 
-    # Generate linewrap length
+    # Generate line-wrap length
     line_wrap = len([
         ""
         for _ in range(
