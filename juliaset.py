@@ -10,6 +10,15 @@ PARAMETERS = ((-2, 0.5), (-1.12, 1.12), (4, 4), (" ", "*", "@"))  # Mandelbrot
 
 
 def algorithm(z: imag.imag, c: imag.imag) -> imag.imag:
+    """This function represents the actual function being graphed as a Julia set
+
+    Parameters:
+        z: imag.imag = The complex number used to check stability
+        c: imag.imag = The point being checked for stability
+
+    Returns:
+        imag.imag -> A new point to use for checking stability
+    """
     if z.a == 0 and z.b == 0:
         return c
     z = (z * z) + c
@@ -17,25 +26,29 @@ def algorithm(z: imag.imag, c: imag.imag) -> imag.imag:
 
 
 def main():
+    """This function implements the above in order to actually graph onto a CLI."""
     print()
 
     # Generate line-wrap length
-    line_wrap = len([
-        ""
-        for _ in range(
-            int(PARAMETERS[0][0] * 100),
-            int(PARAMETERS[0][1] * 100),
-            PARAMETERS[2][1])
-    ])
+    line_wrap = len(
+        [
+            ""
+            for _ in range(
+                int(PARAMETERS[0][0] * 100),
+                int(PARAMETERS[0][1] * 100),
+                PARAMETERS[2][1],
+            )
+        ]
+    )
 
     # Generate points
     points = []
     for b in range(
-            int(PARAMETERS[1][1] * 100),
-            int(PARAMETERS[1][0] * 100), -PARAMETERS[2][0]):
+        int(PARAMETERS[1][1] * 100), int(PARAMETERS[1][0] * 100), -PARAMETERS[2][0]
+    ):
         for a in range(
-                int(PARAMETERS[0][0] * 100),
-                int(PARAMETERS[0][1] * 100), PARAMETERS[2][1]):
+            int(PARAMETERS[0][0] * 100), int(PARAMETERS[0][1] * 100), PARAMETERS[2][1]
+        ):
             points.append(imag.imag(a / 100, b / 100))
 
     count = 0

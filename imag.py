@@ -1,13 +1,25 @@
+"""This module implements a complex number datatype
+with the features necessary to graph most Julia sets."""
 import math
 import cmath
 
 
 class imag:
+    """This class is a complex number datatype
+
+    Attributes:
+        a: float = Real part of the number
+        b: float = Imaginary part of the number
+
+    Methods:
+        None
+    """
+
     def __init__(self, a, b):
         self.a = float(a)
         if math.fabs(self.a) < 0.00000000001:
             self.a = 0
-            
+
         self.b = float(b)
         if math.fabs(self.b) < 0.00000000001:
             self.b = 0
@@ -109,7 +121,7 @@ class imag:
     def __rpow__(self, other):
         if isinstance(other, float) or isinstance(other, int):
             return imag(
-                (other ** self.a) * math.cos(self.b * math.log(other)),
+                (other**self.a) * math.cos(self.b * math.log(other)),
                 math.sin(self.b * math.log(other)),
             )
 
@@ -128,6 +140,7 @@ class imag:
 
 
 def main():
+    """Demo main function"""
     print("e ** (i * pi):")
     print(cmath.e ** (imag(0, 1) * cmath.pi))
     print("(2 + 3i) ** 5:")
