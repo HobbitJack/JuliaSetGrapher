@@ -5,8 +5,8 @@ It is recommended to have at least an 80 column display.
 import imag
 
 # (x-range), (y-range), (res=(80, 40)), (divergent (depth), convergent, (0,0)) ("□", "■", "▣")
-PARAMETERS = ((-2, 0.5), (-1.12, 1.12), (80, 40), (" ", "*", "@"))  # Mandelbrot
-# PARAMETERS = ((-2, 2), (-2, 2), (160, 80), ((" ", ",", ".", "'", ":"), "*", "@"))  # Julia sets
+PARAMETERS = ((-2, 0.5), (-1.12, 1.12), (80, 40), (" ", "*", "@"), 1000)
+# PARAMETERS = ((-2, 2),(-2, 2), (80, 40), ((" ", ",", ".", "'", ":"), "*", "@"), 10000,)
 
 
 def algorithm(z: imag.imag, c: imag.imag) -> imag.imag:
@@ -21,30 +21,46 @@ def algorithm(z: imag.imag, c: imag.imag) -> imag.imag:
     """
     if z.a == 0 and z.b == 0:
         return c
-    z = (z * z) + c
+    z = (z * z) + imag.imag(c.a, c.b)
     return z
 
 
 def test_point(point: imag.imag) -> int:
+    """This function returns the number of iterations it takes for the point to diverge
+
+    Parameters:
+        point: imag.imag = The point to check
+
+    Returns:
+        int -> The number of iterations needed to diverge, or the maximum interation
+    """
     if len(PARAMETERS[3]) == 3 and point.a == 0 and point.b == 0:
         return -1
     z = imag.imag(0, 0)
-    for run in range(100):
+    for run in range(PARAMETERS[4]):
         z = algorithm(z, point)
         if z.a < -2 or z.a > 2 or z.b < -2 or z.b > 2:
             return run
-    return 100
+    return PARAMETERS[4]
 
 
 def point_char_to_draw(runs: int) -> str:
+    """This function returns the correct depth character to print for a particular point
+
+    Parameters:
+        runs: int = The number of iterations needed for the point to diverge
+
+    Returns:
+        str -> The string to print for this particular point
+    """
     if runs == -1:
         return PARAMETERS[3][2]
 
-    if runs == 100:
+    if runs == PARAMETERS[4]:
         return PARAMETERS[3][1]
 
     count = 0
-    while (100 / len(PARAMETERS[3][0])) * (count + 1) < runs:
+    while (PARAMETERS[4] / len(PARAMETERS[3][0])) * (count + 1) < runs:
         count += 1
     return PARAMETERS[3][0][count]
 
